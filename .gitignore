@@ -23,9 +23,10 @@ wheels/
 .installed.cfg
 *.egg
 
-# Environment variables
+# Environment variables (GİZLİ BİLGİLER - ASLA COMMIT ETME!)
 .env
 .env.local
+.env.*.local
 
 # IDE
 .vscode/

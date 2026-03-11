@@ -78,7 +78,7 @@ Açılan JSON içinde şunu arayın:
 1. GitHub repo sayfanıza gidin
 2. **Settings** → **Secrets and variables** → **Actions**
 3. **New repository secret** butonuna tıklayın
-4. İki secret ekleyin:
+4. **ÜÇ** secret ekleyin:
 
 ### Secret 1:
 - **Name:** `TELEGRAM_BOT_TOKEN`
@@ -88,8 +88,24 @@ Açılan JSON içinde şunu arayın:
 - **Name:** `TELEGRAM_CHAT_ID`
 - **Secret:** `123456789` (kendi chat id'niz)
 
+### Secret 3 (YENİ - Mesajınız):
+- **Name:** `TELEGRAM_MESSAGE`
+- **Secret:** Göndermek istediğiniz mesaj (örnek aşağıda)
+
+**Mesaj örneği:**
 ```
-✅ Çıktı: Secrets güvenli şekilde saklandı
+🌅 Günaydın!
+
+📅 Tarih: {today}
+
+İyi günler! 💪
+```
+
+**İpucu:** `{today}` yazarsanız otomatik olarak günün tarihi eklenir (örn: 11.03.2026)
+
+```
+✅ Çıktı: 3 Secret güvenli şekilde saklandı
+✅ Mesajınız artık repo'da görünmeyecek!
 ```
 
 ---
@@ -114,7 +130,7 @@ Açılan JSON içinde şunu arayın:
    - ❌ Chat ID yanlış → Adım 3'ü tekrar yapın
    - ❌ Token yanlış → Adım 1'i kontrol edin
    - ❌ Bot start yapılmamış → Adım 2'yi tekrar yapın
-   - ❌ Secrets yanlış yazılmış → TELEGRAM_BOT_TOKEN ve TELEGRAM_CHAT_ID ismini kontrol edin
+   - ❌ Secrets yanlış yazılmış → TELEGRAM_BOT_TOKEN, TELEGRAM_CHAT_ID ve TELEGRAM_MESSAGE ismini kontrol edin
 
 ---
 
@@ -135,24 +151,36 @@ Artık bot **her sabah saat 08:00 (Türkiye)** otomatik çalışacak!
 
 ## 📝 Mesajı Özelleştirme
 
-`bot.py` dosyasındaki `message` değişkenini düzenleyin:
+Mesajınız artık **GitHub Secrets**'ta saklanıyor ve **repo'da görünmüyor**! 🔒
 
-```python
-message = f"""
+### GitHub Actions için (otomasyon):
+1. Settings → Secrets and variables → Actions
+2. `TELEGRAM_MESSAGE` secret'ını bulun
+3. **Update** tıklayın
+4. Yeni mesajınızı yazın
+
+### Lokal test için:
+Detaylı bilgi için **[GIZLILIK.md](GIZLILIK.md)** dosyasına bakın.
+
+**Mesaj formatı:**
+- `{today}` yazarsanız otomatik tarih eklenir
+- Emoji kullanabilirsiniz
+- Çok satırlı mesaj yazabilirsiniz
+
+```
+Örnek mesaj:
+
 🌅 Günaydın!
 
 📅 Tarih: {today}
 
-İstediğiniz mesajı buraya yazın! 💪
-"""
+Bugün harika bir gün olacak! 💪
 ```
 
-Değişiklik yaptıktan sonra:
-```bash
-git add .
-git commit -m "Mesaj güncellendi"
-git push
-```
+**Değişiklik yaptıktan sonra:**
+- Hemen geçerli olur
+- Kodda değişiklik yapmanıza gerek yok
+- Kimse göremez (repo public olsa bile)
 
 ---
 
@@ -194,6 +222,9 @@ schedule:
 - Her kişi için ayrı CHAT_ID alın
 - Bot kodunda loop ile hepsine gönderin
 
+### Mesajım GitHub'da görünür mü?
+**HAYIR!** GitHub Secrets şifrelenmiş saklanır ve repo'da görünmez.
+
 ---
 
 ## ✅ Kontrol Listesi
@@ -202,10 +233,11 @@ schedule:
 - [ ] TOKEN aldım
 - [ ] Karşı taraf botu aktif etti (/start)
 - [ ] CHAT_ID öğrendim (getUpdates)
-- [ ] GitHub Secrets ekledim
+- [ ] **3 adet** GitHub Secrets ekledim (TOKEN, CHAT_ID, MESSAGE)
 - [ ] Manuel test yaptım (Actions → Run workflow)
 - [ ] Mesaj geldi ✅
+- [ ] Mesajım repo'da görünmüyor ✅
 
 ---
 
-🎉 **Tebrikler!** Sisteminiz hazır. Yarın sabah ilk otomatik mesajı alacaksınız.
+🎉 **Tebrikler!** Sisteminiz hazır ve mesajınız güvende. Yarın sabah ilk otomatik mesajı alacaksınız.
