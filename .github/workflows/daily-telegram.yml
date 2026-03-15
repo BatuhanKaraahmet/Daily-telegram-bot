@@ -1,9 +1,9 @@
 name: Daily Telegram Message
 
 on:
-  # Her gün sabah 08:00 Türkiye saati (05:00 UTC)
+  # Her gün sabah 07:30 Türkiye saati (04:30 UTC)
   schedule:
-    - cron: '0 5 * * *'
+    - cron: '30 4 * * *'
   
   # Manuel tetikleme için
   workflow_dispatch:
